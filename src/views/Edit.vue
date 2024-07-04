@@ -1,16 +1,19 @@
 <template>
-  Edit
-  <div v-for="i in 50">
-      {{i}}
-  </div>
+    <div>
+        <img src="@/assets/test.jpg"style="width: 500px" alt="">
+    </div>
+
+
+
 </template>
+<style scoped>
+</style>
 
 <script>
 
 export default {
-  name: 'Edit',
-  components: {
+    name: 'Edit',
+    components: {},
 
-  }
 }
 </script>

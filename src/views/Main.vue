@@ -5,7 +5,11 @@
         </div>
 
         <div class="main">
-            <router-view/>
+            <router-view v-slot="{ Component }">
+                <transition  name="fade-slide">
+                    <component :is="Component" />
+                </transition>
+            </router-view>
         </div>
 
     </div>
@@ -30,6 +34,7 @@ export default {
   width: 100%;
   height: 100%;
   display: flex;
+    font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 
   .left {
     width: 80px;
