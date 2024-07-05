@@ -139,6 +139,9 @@ export default {
 </script>
 
 <style scoped lang="less">
+.blogCardRight{
+    padding-right: 20px;
+}
 .blog-card-wrapper {
     padding: 5px;
     margin-bottom: 5px; // 增加卡片之间的间距
@@ -148,11 +151,11 @@ export default {
     background-color: #ffffff;
     transition: all 0.4s ease;
     border-radius: 8px;
-    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    box-shadow:0 2px 2px rgba(0,0,0,0.1);
 
     &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
     }
 }
 

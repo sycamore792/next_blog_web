@@ -2,26 +2,25 @@
     <div style="display: flex;overflow: auto;width: 100%;height: 100%">
         <div style="flex: 1;overflow: auto ;padding-right: 30px">
             <div class="tap_bar">
-                <div class="tab_item" @click="getBlogList(0)">
+                <div class="tab_item" :class="{'active': currentTab === 0}" @click="getBlogList(0)">
                     正在关注
                 </div>
-                <div class="tab_item" @click="getBlogList(1)">
+                <div class="tab_item" :class="{'active': currentTab === 1}" @click="getBlogList(1)">
                     推荐阅读
                 </div>
+                <div class="search-box">
+                    <input :class="{ expanded:  searchBarIsExpanded }" class="search-input"
+                           type="text" placeholder="搜索" v-model="searchQuery" @focus="searchBarIsExpanded = true"
+                           @blur="searchBarIsExpanded = false"/>
+                </div>
             </div>
-            <div>
+            <div style="padding-top: 30px">
                 <template v-for="item in blogList " :key="item.id">
                     <BlogItem :blogData="item"></BlogItem>
                 </template>
             </div>
         </div>
-        <div style="width: 450px;overflow: auto; padding: 20px;  border-left: 1px solid #e5e5e5;">
-<!--            <div class="search_bar" style="padding: 30px 0;">-->
-<!--                <form>-->
-<!--                    <input type="text" placeholder="请输入您要搜索的内容...">-->
-<!--                    <button type="submit"></button>-->
-<!--                </form>-->
-<!--            </div>-->
+        <div style="width: 40%;overflow: auto; padding: 40px;  border-left: 1px solid #e5e5e5;">
             <div class="ranking_list">
                 <div style="font-weight: bolder ">
                     <div class="colored-dot"></div>
@@ -53,85 +52,95 @@ export default {
     },
     methods: {
         getBlogList(type) {
-            if (type === 1) {
-                //推荐阅读
-                this.blogList = [
-                    {
-                        id: "1",
-                        title: "Your portfolio is stopping you from geting that job",
-                        author: "Sycamore",
-                        authorAvatar: avatar,
-                        publishAt: "4 days ago",
-                        contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
-                        readCount: 3000
-                    }, {
-                        id: "2",
-                        title: "Melody mobile app: a Ul UX case study",
-                        author: "Sycamore",
-                        authorAvatar: avatar,
-                        publishAt: "4 days ago",
-                        contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
-                        readCount: 3000
-                    }, {
-                        id: "2",
-                        title: "Melody mobile app: a Ul UX case study",
-                        author: "Sycamore",
-                        authorAvatar: avatar,
-                        publishAt: "4 days ago",
-                        contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
-                        readCount: 3000
-                    }, {
-                        id: "2",
-                        title: "Melody mobile app: a Ul UX case study",
-                        author: "Sycamore",
-                        authorAvatar: avatar,
-                        publishAt: "4 days ago",
-                        contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
-                        readCount: 3000
-                    }, {
-                        id: "2",
-                        title: "Melody mobile app: a Ul UX case study",
-                        author: "Sycamore",
-                        authorAvatar: avatar,
-                        publishAt: "4 days ago",
-                        contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
-                        readCount: 3000
-                    }, {
-                        id: "2",
-                        title: "Melody mobile app: a Ul UX case study",
-                        author: "Sycamore",
-                        authorAvatar: avatar,
-                        publishAt: "4 days ago",
-                        contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
-                        readCount: 3000
-                    }
-                ];
-            } else {
-                //正在关注
-                this.blogList = [
-                    {
-                        id: "1",
-                        title: "Your portfolio is stopping you from geting that job",
-                        author: "Sycamore",
-                        authorAvatar: avatar,
-                        publishAt: "4 days ago",
-                        contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
-                        readCount: 3000
-                    }, {
-                        id: "2",
-                        title: "Melody mobile app: a Ul UX case study",
-                        author: "Sycamore",
-                        authorAvatar: avatar,
-                        publishAt: "4 days ago",
-                        contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
-                        readCount: 3000
-                    }
-                ];
+
+            if (type !== this.currentTab) {
+                console.log(type)
+                if (type === 1) {
+                    //推荐阅读
+                    this.blogList = [
+                        {
+                            id: "1",
+                            title: "Your portfolio is stopping you from geting that job",
+                            author: "Sycamore",
+                            authorAvatar: avatar,
+                            publishAt: "4 days ago",
+                            contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
+                            readCount: 3000
+                        }, {
+                            id: "2",
+                            title: "Melody mobile app: a Ul UX case study",
+                            author: "Sycamore",
+                            authorAvatar: avatar,
+                            publishAt: "4 days ago",
+                            contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
+                            readCount: 3000
+                        }, {
+                            id: "2",
+                            title: "Melody mobile app: a Ul UX case study",
+                            author: "Sycamore",
+                            authorAvatar: avatar,
+                            publishAt: "4 days ago",
+                            contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
+                            readCount: 3000
+                        }, {
+                            id: "2",
+                            title: "Melody mobile app: a Ul UX case study",
+                            author: "Sycamore",
+                            authorAvatar: avatar,
+                            publishAt: "4 days ago",
+                            contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
+                            readCount: 3000
+                        }, {
+                            id: "2",
+                            title: "Melody mobile app: a Ul UX case study",
+                            author: "Sycamore",
+                            authorAvatar: avatar,
+                            publishAt: "4 days ago",
+                            contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
+                            readCount: 3000
+                        }, {
+                            id: "2",
+                            title: "Melody mobile app: a Ul UX case study",
+                            author: "Sycamore",
+                            authorAvatar: avatar,
+                            publishAt: "4 days ago",
+                            contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
+                            readCount: 3000
+                        }
+                    ];
+                    this.currentTab = type
+                } else {
+                    //正在关注
+                    this.blogList = [
+                        {
+                            id: "1",
+                            title: "Your portfolio is stopping you from geting that job",
+                            author: "Sycamore",
+                            authorAvatar: avatar,
+                            publishAt: "4 days ago",
+                            contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
+                            readCount: 3000
+                        }, {
+                            id: "2",
+                            title: "Melody mobile app: a Ul UX case study",
+                            author: "Sycamore",
+                            authorAvatar: avatar,
+                            publishAt: "4 days ago",
+                            contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
+                            readCount: 3000
+                        }
+                    ];
+                    this.currentTab = 0
+                }
             }
+
         }
     },
     data() {
         return {
+            searchBarIsExpanded: false,
+            searchQuery: '',
+            currentTab: null,
             blogList: [],
             readRankingData: [
                 {
@@ -152,6 +161,28 @@ export default {
 </script>
 
 <style scoped lang="less">
+.search-input {
+  width: 200px; /* 初始宽度 */
+  transition: width 0.3s ease; /* 添加过渡效果 */
+    &:hover{
+        width: 400px; /* 伸长后的宽度 */
+    }
+}
+
+.search-input.expanded {
+  width: 400px; /* 伸长后的宽度 */
+}
+
+.search-box {
+  margin-left: auto;
+}
+
+.search-box input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 .ranking_list {
 }
 
@@ -163,72 +194,22 @@ export default {
   display: inline-block;
 }
 
-.search_bar {
-
-  form {
-    position: relative;
-    width: 300px;
-    margin: 0 auto;
-  }
-
-  input, button {
-    border: none;
-    outline: none;
-  }
-
-  input {
-    width: 100%;
-    height: 42px;
-    padding-left: 13px;
-  }
-
-  button {
-    height: 42px;
-    width: 42px;
-    cursor: pointer;
-    position: absolute;
-  }
-}
-
-.search_bar form {
-  height: 42px;
-}
-
-.search_bar input {
-  width: 250px;
-  border-radius: 42px;
-  border: 2px solid #324B4E;
-  background: #ffffff;
-  transition: .3s linear;
-  float: right;
-}
-
-.search_bar input:focus {
-  width: 300px;
-}
-
-.search_bar button {
-  background: none;
-  top: -2px;
-  right: 0;
-}
-
-.search_bar button:before {
-  content: "\f002";
-  font-family: FontAwesome;
-  color: #324b4e;
-}
-
 
 .tap_bar {
   display: flex;
-  padding: 25px 0;
-  border-bottom: 1px solid #e5e5e5;
+  padding: 25px 10px;
+  border-bottom: 1px solid #eaeaea;
 
   .tab_item {
     font-weight: bold;
     margin-right: 10px;
     cursor: pointer;
   }
+
+  .tab_item.active {
+    color: #388647;
+    border-bottom: 2px solid #388647;
+  }
+
 }
 </style>

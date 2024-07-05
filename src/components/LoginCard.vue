@@ -1,5 +1,5 @@
 <template>
-    <div class="modal  animate__shakeX" @click="closeModal">
+    <div class="modal " @click="closeModal">
         <div class="modal-content">
             <h2>登录查看更多</h2>
             <p>Choose one of the option to go</p>
@@ -8,10 +8,10 @@
                 <input type="password" v-model="password" placeholder="Password" required>
                 <p class="or-continue">Or continue with</p>
                 <div class="social-login">
-                    <button type="button" class="social-btn google"><img src="/path-to-google-icon.png" alt="Google">
+                    <button type="button" class="social-btn google"><img src="@/assets/Google.png" alt="Google">
                     </button>
-                    <button type="button" class="social-btn meta"><img src="/path-to-meta-icon.png" alt="Meta"></button>
-                    <button type="button" class="social-btn apple"><img src="/path-to-apple-icon.png" alt="Apple">
+                    <button type="button" class="social-btn facebook"><img src="@/assets/Facebook.png" alt="Meta"></button>
+                    <button type="button" class="social-btn apple"><img src="@/assets/Apple.png" alt="Apple">
                     </button>
                 </div>
                 <button type="submit" class="login-btn">Login</button>
@@ -35,7 +35,6 @@ export default {
         closeModal(event) {
             // 如果点击的是模态框本身（而不是其内容），则关闭模态框
             if (event.target === event.currentTarget) {
-                console.log("asdasda")
                 this.$emit('close')
             }
         },
@@ -67,7 +66,7 @@ export default {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  width: 300px;
+  width: 350px;
   text-align: center;
 }
 
