@@ -1,98 +1,4 @@
-<!--<template>-->
-<!--    <div style="align-items: center;display: flex">-->
-<!--        <div class="blogCardLeft">-->
-<!--            <div  class="blogCardHeader">-->
-<!--                <img :src="blogData.authorAvatar" class="authorAvatar"/>-->
-<!--                <div>-->
-<!--                    {{ blogData.author }}-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    {{ blogData.publishAt }}-->
-<!--                </div>-->
-<!--            </div>-->
 
-<!--            <div @click="toBlogPage()" class="pointer blogCardMain">-->
-<!--                <div class="blogTitle" style="font-weight: bolder">-->
-<!--                    {{ blogData.title }}-->
-<!--                </div>-->
-<!--                <div style="padding-top:  10px" class="blogContentPreview markdown-body" v-html="blogData.contentPreview">-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="blogCardFooter ">-->
-<!--                <div class="pointer">-->
-<!--                    {{ blogData.readCount }} read-->
-<!--                </div>-->
-<!--                <img class="pointer" src="@/assets/bookmark_icon.png" alt="" />-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div @click="toBlogPage()" class="blogCardRight">-->
-<!--            <img :src="blogData.authorAvatar" class="blogPost"/>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--</template>-->
-
-<!--<script>-->
-<!--export default {-->
-<!--    name: "BlogItem",-->
-<!--    props: {-->
-<!--        blogData: {-->
-<!--            type: Object,-->
-<!--            default() {-->
-<!--                return {};-->
-<!--            }-->
-<!--        }-->
-<!--    },-->
-<!--    data() {-->
-<!--        return {}-->
-<!--    },-->
-<!--    methods: {-->
-<!--        toBlogPage(){-->
-<!--            this.$router.push('/blogDetail/'+this.blogData.id);-->
-<!--        }-->
-<!--    }-->
-
-<!--}-->
-<!--</script>-->
-
-<!--<style scoped lang="less">-->
-<!--.authorAvatar {-->
-<!--  width: 30px;-->
-<!--  height: 30px;-->
-<!--  border-radius: 50%;-->
-<!--}-->
-
-<!--.blogPost {-->
-<!--  width: 150px;-->
-<!--  height: 150px;-->
-<!--}-->
-
-<!--.blogCardMain {-->
-<!--  align-items: center;-->
-<!--  margin: 10px;-->
-<!--  padding: 10px;-->
-<!--  gap: 15px;-->
-<!--}-->
-
-<!--.blogCardHeader {-->
-<!--  display: flex;-->
-<!--  align-items: center;-->
-<!--  margin: 10px;-->
-<!--  padding: 10px;-->
-<!--  gap: 15px;-->
-<!--}-->
-
-<!--.blogCardFooter {-->
-<!--  display: flex;-->
-<!--  align-items: center;-->
-<!--  margin: 10px;-->
-<!--  padding: 10px;-->
-<!--  gap: 15px;-->
-<!--}-->
-<!--</style>-->
 <template>
     <div class="blog-card-wrapper">
         <div class="blog-card" style="align-items: center; display: flex">
@@ -148,9 +54,9 @@ export default {
 }
 
 .blog-card {
-    background-color: #ffffff;
+    background-color: #ece8e8;
     transition: all 0.4s ease;
-    border-radius: 8px;
+    border-radius: 20px;
     box-shadow:0 2px 2px rgba(0,0,0,0.1);
 
     &:hover {
@@ -207,7 +113,7 @@ export default {
     transition: color 0.3s ease;
 
     &:hover {
-        color: #007bff;
+        color: #7c7e81;
     }
 }
 </style>

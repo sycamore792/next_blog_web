@@ -12,6 +12,9 @@
                     <input :class="{ expanded:  searchBarIsExpanded }" class="search-input"
                            type="text" placeholder="搜索" v-model="searchQuery" @focus="searchBarIsExpanded = true"
                            @blur="searchBarIsExpanded = false"/>
+
+                    <!--                    <img class="search-icon" src="@/assets/search_icon.png" alt="搜索图标"/>-->
+
                 </div>
             </div>
             <div style="padding-top: 30px">
@@ -43,6 +46,7 @@ import BlogItem from '@/components/BlogItem.vue'
 import avatar from "@/assets/avatar.jpg"
 import mdi from "@/utils/mdi.js";
 import ReadRankCard from "@/components/ReadRankCard.vue";
+import blogApi from '@/api/BlogApi';
 
 export default {
     name: 'Home',
@@ -54,8 +58,28 @@ export default {
         getBlogList(type) {
 
             if (type !== this.currentTab) {
-                console.log(type)
                 if (type === 1) {
+                    blogApi.getBlogList(1, 10).then(res => {
+                        // this.blogList = res.data.data
+                        if (!res.data.success) {
+                            console.log(res.data.errMessage)
+                        } else {
+                            let data = res.data.data;
+                            for (let i = 0; i < data.length; i++) {
+                                data[i] = {
+                                    id: data[i].id,
+                                    title: data[i].title,
+                                    author: "Sycamore",
+                                    authorAvatar: avatar,
+                                    publishAt: "4 days ago",
+                                    contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
+                                    readCount: 3000
+                                }
+                            }
+                            this.blogList = data;
+
+                        }
+                    })
                     //推荐阅读
                     this.blogList = [
                         {
@@ -128,6 +152,22 @@ export default {
                             publishAt: "4 days ago",
                             contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
                             readCount: 3000
+                        }, {
+                            id: "2",
+                            title: "Melody mobile app: a Ul UX case study",
+                            author: "Sycamore",
+                            authorAvatar: avatar,
+                            publishAt: "4 days ago",
+                            contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
+                            readCount: 3000
+                        }, {
+                            id: "2",
+                            title: "Melody mobile app: a Ul UX case study",
+                            author: "Sycamore",
+                            authorAvatar: avatar,
+                            publishAt: "4 days ago",
+                            contentPreview: mdi.render("An intense way to learn about the process and practice your designs skills -\nMy 1st hackathon Hackathons have been on my mind since l heard it was agood way to gain experience as a junior UX designer. As my portfolio..."),
+                            readCount: 3000
                         }
                     ];
                     this.currentTab = 0
@@ -164,23 +204,38 @@ export default {
 .search-input {
   width: 200px; /* 初始宽度 */
   transition: width 0.3s ease; /* 添加过渡效果 */
-    &:hover{
-        width: 400px; /* 伸长后的宽度 */
-    }
+  height: 35px;
+  font-size: 16px;
+
+  &:hover {
+    width: 300px; /* 伸长后的宽度 */
+    //height: 40px;
+  }
 }
 
 .search-input.expanded {
-  width: 400px; /* 伸长后的宽度 */
+  width: 300px; /* 伸长后的宽度 */
+  //height: 40px;
 }
 
 .search-box {
   margin-left: auto;
+  align-items: center;
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
 }
 
 .search-box input {
   padding: 5px 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 20px;
 }
 
 .ranking_list {
@@ -200,16 +255,28 @@ export default {
   padding: 25px 10px;
   border-bottom: 1px solid #eaeaea;
 
-  .tab_item {
-    font-weight: bold;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-
-  .tab_item.active {
-    color: #388647;
-    border-bottom: 2px solid #388647;
-  }
+  //.tab_item {
+  //  font-weight: bold;
+  //  margin-right: 10px;
+  //  cursor: pointer;
+  //}
+    .tab_item {
+        font-weight: bold;
+        margin-right: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease; // 添加过渡效果
+    }
+    .tab_item.active {
+        color: #323234;
+        //font-size: 18px;
+        border-bottom: 2px solid;
+        transform: scale(1.2); // 添加放大效果
+    }
+  //.tab_item.active {
+  //  color: #388647;
+  //  font-size: 18px;
+  //  border-bottom: 2px solid;
+  //}
 
 }
 </style>

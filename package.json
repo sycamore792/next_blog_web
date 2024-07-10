@@ -9,6 +9,7 @@
   "dependencies": {
     "@traptitech/markdown-it-katex": "^3.6.0",
     "animate.css": "^4.1.1",
+    "axios": "^1.7.2",
     "highlight.js": "^11.9.0",
     "markdown-it": "^14.1.0",
     "markdown-it-link-attributes": "^4.0.1",
