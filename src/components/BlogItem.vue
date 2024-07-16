@@ -54,11 +54,11 @@ export default {
 }
 
 .blog-card {
-    background-color: #ece8e8;
+    background-color: #ffffff;
     transition: all 0.4s ease;
     border-radius: 20px;
-    box-shadow:0 2px 2px rgba(0,0,0,0.1);
-
+    //box-shadow:0 2px 2px rgba(0,0,0,0.1);
+    box-shadow: 2px 2px 13px -3px rgba(0, 0, 0, 0.1);
     &:hover {
         transform: translateY(-5px);
         box-shadow: 0 3px 6px rgba(0,0,0,0.1);
@@ -113,7 +113,7 @@ export default {
     transition: color 0.3s ease;
 
     &:hover {
-        color: #7c7e81;
+        color: #6c6c6e;
     }
 }
 </style>

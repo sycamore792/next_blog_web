@@ -5,11 +5,22 @@
             <component :is="Component" />
         </transition>
     </router-view>
+    <LoginCard></LoginCard>
+    <Toast :message="toast.message" :title="toast.title" :type="toast.type" :visible="toast.visible"/>
+
 </template>
 <script>
 
-export default {
+import Toast from "@/components/Toast.vue";
+import {useToastStore} from "@/store/toast";
+import LoginCard from "@/components/LoginCard.vue";
 
+export default {
+    components: {LoginCard, Toast}
+    , setup() {
+        const toast = useToastStore()
+        return {toast}
+    }
 }
 </script>
 <style lang="less">
